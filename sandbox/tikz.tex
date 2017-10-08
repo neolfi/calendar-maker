@@ -1,0 +1,30 @@
+\documentclass[tikz]{standalone}
+\usepackage[czech]{babel}
+\usepackage[czech]{translator}
+\usepackage{tgheros,tikz,array}
+\usetikzlibrary{calendar}
+\begin{document}
+\sffamily
+\newcommand\daytext[2]{%
+  \begin{tabular}{|m{2cm}|m{1cm}|}
+    \hline
+    {#1} & \\[1mm]
+    \hline
+    {#2\color{black}} & \\[2mm]
+    \hline
+    \tiny Jan & \\[1mm]
+    \hline
+  \end{tabular}
+}
+\begin{tikzpicture}
+  \calendar (cal)
+  [dates=2016-04-17 to 2016-04-23,day list downward,day yshift=17mm,
+   day text={\daytext{\tiny\%wt}{\tiny\%d-}}]%\ooalign{\Huge\%d-\cr\hidewidth\raisebox{1cm}{\%wt}\hidewidth}}]
+  if (weekend) [font=\bfseries]
+  if (Sunday) [red];
+  \node[above right,font=\bfseries\LARGE] at (cal-2016-04-17.north west)
+    {April 17--23, 2016};
+  \node[inner sep=10pt] (russell) at (0,0)
+	    {\includegraphics[width=.25\textwidth]{pic1.png}};
+\end{tikzpicture}
+\end{document}
