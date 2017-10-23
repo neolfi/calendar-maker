@@ -1,0 +1,46 @@
+\documentclass[a5paper,landscape]{scrartcl} 
+\usepackage{tikz}
+
+\newcommand\PlaceText[3]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[outer sep=0pt,inner sep=0pt,anchor=south west] 
+  at ([xshift=#1,yshift=-#2]current page.north west) {#3};
+\end{tikzpicture}%
+}
+
+\newcommand\PlaceLine[3]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[outer sep=0pt,inner sep=0pt,anchor=south west] 
+  at ([xshift=#1,yshift=-#2]current page.north west) (a) {};
+\node[outer sep=0pt,inner sep=0pt,anchor=south west] 
+  at ([xshift=#3,yshift=-#2]current page.north west) (b) {};
+\draw[black,thick]
+    (a) -- (b);
+\end{tikzpicture}%
+}
+
+\begin{document}
+
+\PlaceText{0mm}{17mm}{TEST}
+\PlaceText{0mm}{34mm}{TEST}
+\PlaceText{0mm}{51mm}{TEST}
+\PlaceText{0mm}{68mm}{TEST}
+\PlaceText{0mm}{85mm}{TEST}
+\PlaceText{0mm}{102mm}{TEST}
+\PlaceText{0mm}{119mm}{TEST}
+
+\PlaceLine{0mm}{20mm}{100mm}
+\PlaceLine{0mm}{37mm}{100mm}
+\PlaceLine{0mm}{54mm}{100mm}
+\PlaceLine{0mm}{71mm}{100mm}
+\PlaceLine{0mm}{88mm}{100mm}
+\PlaceLine{0mm}{105mm}{100mm}
+
+\begin{tikzpicture}[remember picture,overlay]
+  \node[outer sep=0pt,inner sep=0pt,anchor=south west] 
+    at ([xshift=100mm,yshift=-120mm]current page.north west)
+    {\includegraphics{pic1.png}};  
+\end{tikzpicture}
+
+
+\end{document}
