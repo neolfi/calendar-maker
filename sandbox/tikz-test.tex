@@ -1,5 +1,8 @@
 \documentclass[a5paper,landscape]{scrartcl} 
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
 \usepackage{tikz}
+
 
 \newcommand\PlaceText[3]{%
 \begin{tikzpicture}[remember picture,overlay]
@@ -21,13 +24,16 @@
 
 \begin{document}
 
-\PlaceText{0mm}{17mm}{TEST}
-\PlaceText{0mm}{34mm}{TEST}
-\PlaceText{0mm}{51mm}{TEST}
-\PlaceText{0mm}{68mm}{TEST}
-\PlaceText{0mm}{85mm}{TEST}
-\PlaceText{0mm}{102mm}{TEST}
-\PlaceText{0mm}{119mm}{TEST}
+% Disable page numbering   
+\pagestyle{empty}  
+
+\PlaceText{0mm}{17mm}{Pondělí}
+\PlaceText{0mm}{34mm}{Úterý}
+\PlaceText{0mm}{51mm}{Středa}
+\PlaceText{0mm}{68mm}{Čtvrtek}
+\PlaceText{0mm}{85mm}{Pátek}
+\PlaceText{0mm}{102mm}{Sobota}
+\PlaceText{0mm}{119mm}{Neděle}
 
 \PlaceLine{0mm}{20mm}{100mm}
 \PlaceLine{0mm}{37mm}{100mm}
@@ -38,9 +44,14 @@
 
 \begin{tikzpicture}[remember picture,overlay]
   \node[outer sep=0pt,inner sep=0pt,anchor=south west] 
-    at ([xshift=100mm,yshift=-120mm]current page.north west)
+    at ([xshift=110mm,yshift=-120mm]current page.north west)
     {\includegraphics{pic1.png}};  
 \end{tikzpicture}
 
+\newpage
+
+Test
+
+\PlaceText{0mm}{17mm}{TTTTTTTTTTTTTTTTTTTTTT}
 
 \end{document}
