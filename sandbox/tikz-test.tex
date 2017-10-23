@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[czech]{babel}
 \usepackage{tikz}
+\usepackage[export]{adjustbox}
 
 
 \newcommand\PlaceText[3]{%
@@ -45,7 +46,7 @@
 \begin{tikzpicture}[remember picture,overlay]
   \node[outer sep=0pt,inner sep=0pt,anchor=south west] 
     at ([xshift=110mm,yshift=-120mm]current page.north west)
-    {\includegraphics{pic1.png}};  
+    {\includegraphics[max width=5cm, max height=5cm]{pic1.png}};  
 \end{tikzpicture}
 
 \newpage
