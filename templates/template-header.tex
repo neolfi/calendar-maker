@@ -1,0 +1,38 @@
+\documentclass[a5paper,landscape]{scrartcl} 
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{color}
+
+
+\newcommand\PlaceText[3]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[outer sep=0pt,inner sep=0pt,anchor=south] 
+  at ([xshift=#1,yshift=-#2]current page.north west) {#3};
+\end{tikzpicture}%
+}
+
+\newcommand\PlaceTextLeft[3]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[outer sep=0pt,inner sep=0pt,anchor=south east] 
+  at ([xshift=#1,yshift=-#2]current page.north west) {#3};
+\end{tikzpicture}%
+}
+
+\newcommand\PlaceLine[3]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[outer sep=0pt,inner sep=0pt,anchor=south west] 
+  at ([xshift=#1,yshift=-#2]current page.north west) (a) {};
+\node[outer sep=0pt,inner sep=0pt,anchor=south west] 
+  at ([xshift=#3,yshift=-#2]current page.north west) (b) {};
+\draw[black,thick]
+    (a) -- (b);
+\end{tikzpicture}%
+}
+
+\begin{document}
+
+% Disable page numbering   
+\pagestyle{empty}  
+
