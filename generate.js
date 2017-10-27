@@ -65,7 +65,7 @@ function output_week( week ) {
 	var date = get_week( week );
 
 	output_template()
-	photo = photos[date.week().toString()]
+	photo = photos[(week+1).toString()]
 	if ( photo != undefined ) output_photo(photo)
 	console.log("=== Week " + date.week().toString())
 	for(var day = 0 ; day < 7; day++ )
@@ -82,6 +82,12 @@ function output_week( week ) {
 file = fs.readFileSync('templates/template-header.tex', {encoding: 'utf8'})
 fs.writeFileSync(outfilename, file)
 
+date = get_week( 0 );
+if ( date.week() == 52 ) {
+	set_output_right();
+	output_week( 52 );
+}
+
 for ( var week = 0; week < 26; week+=2 ) {
 	set_output_left();
 	output_week( week );
@@ -90,6 +96,8 @@ for ( var week = 0; week < 26; week+=2 ) {
 	output_week( 51-week );
 	output_week( 51-week-1 );
 }
+
+
 
 file = fs.readFileSync('templates/template-footer.tex', {encoding: 'utf8'})
 fs.appendFileSync(outfilename, file)
