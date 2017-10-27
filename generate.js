@@ -5,6 +5,7 @@ var outfilename = 'output.tex'
 var arrange_template = 'templates/template-page-left.tex';
 var arrange_text_pos = 132;
 var arrange_photo_pos = 67;
+var arrange_week_header_command = 'Right{15mm}'
 
 var moment = require('moment');
 require('moment/locale/cs')
@@ -16,17 +17,29 @@ function set_output_left() {
 	arrange_template = 'templates/template-page-left.tex';
 	arrange_text_pos = 132;
 	arrange_photo_pos = 67;
+	arrange_week_header_command = 'Right{15mm}'
 }
 
 function set_output_right() {
 	arrange_template = 'templates/template-page-right.tex';
 	arrange_text_pos = 25;
 	arrange_photo_pos = 143;
+	arrange_week_header_command = 'Left{195mm}'
 }
 
 function output_template() {
 	file = fs.readFileSync(arrange_template, {encoding: 'utf8'})
 	fs.appendFileSync(outfilename, file)
+}
+
+function output_week_header( week ) {
+	var date = get_week( week );
+	var month = date.format('MMMM Y');
+	var week_num = date.week();
+	date.add(6, 'days')
+	if ( month != date.format('MMMM Y') ) month += ' / ' + date.format('MMMM Y')
+	var header = '\\PlaceText' + arrange_week_header_command + '{18mm}{' + month + ' / ' + week_num + '. týden}'
+	fs.appendFileSync(outfilename, header)
 }
 
 function output_day( day, dayofweek ) {
@@ -65,6 +78,7 @@ function output_week( week ) {
 	var date = get_week( week );
 
 	output_template()
+	output_week_header( week )
 	photo = photos[(week+1).toString()]
 	if ( photo != undefined ) output_photo(photo)
 	console.log("=== Week " + date.week().toString())

@@ -20,6 +20,13 @@
 \end{tikzpicture}%
 }
 
+\newcommand\PlaceTextRight[3]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[outer sep=0pt,inner sep=0pt,anchor=south west] 
+  at ([xshift=#1,yshift=-#2]current page.north west) {#3};
+\end{tikzpicture}%
+}
+
 \newcommand\PlaceLine[3]{%
 \begin{tikzpicture}[remember picture,overlay]
 \node[outer sep=0pt,inner sep=0pt,anchor=south west] 
