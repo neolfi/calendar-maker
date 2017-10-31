@@ -6,12 +6,15 @@ var arrange_template = 'templates/template-page-left.tex';
 var arrange_text_pos = 132;
 var arrange_photo_pos = 67;
 var arrange_week_header_command = 'Right{15mm}'
+var arrange_color = ''
 
 var moment = require('moment');
 require('moment/locale/cs')
 
 var namedays = require('./namedays.json')
 var photos = require('./photos.json')
+var days = require('./days.json')
+var holidays = require('./holidays.json')
 
 function set_output_left() {
 	arrange_template = 'templates/template-page-left.tex';
@@ -42,15 +45,29 @@ function output_week_header( week ) {
 	fs.appendFileSync(outfilename, header)
 }
 
+function set_color( text ) {
+	if ( arrange_color != '' ) return '\\textcolor{' + arrange_color + '}{' + text + '}'
+	else return text
+}
+
+function output_day_name( dayofweek ) {
+	var offset = 20 + 17 * dayofweek
+	var color_day_name = set_color(days[dayofweek.toString()])
+	var name = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\small{' + color_day_name + '}}\n'
+	fs.appendFileSync(outfilename, name)
+}
+
 function output_day( day, dayofweek ) {
 	var offset = 27 + 17 * dayofweek
-	var date = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\huge{' + day + '}}\n'
+	var color_day = set_color(day)
+	var date = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\huge{' + color_day + '}}\n'
 	fs.appendFileSync(outfilename, date)
 }
 
 function output_name( name, dayofweek ) {
 	var offset = 31 + 17 * dayofweek
-	var name = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\emph{\\tiny{' + name + '}}}\n'
+	var color_name = set_color(name)
+	var name = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\emph{\\tiny{' + color_name + '}}}\n'
 	fs.appendFileSync(outfilename, name) 
 }
 
@@ -74,6 +91,7 @@ function get_week( week ) {
 	return date
 }
 
+
 function output_week( week ) {
 	var date = get_week( week );
 
@@ -84,6 +102,10 @@ function output_week( week ) {
 	console.log("=== Week " + date.week().toString())
 	for(var day = 0 ; day < 7; day++ )
 	{
+		var holidays_text = holidays[date.format('D.M.')]
+		if ( (day == 5) || (day == 6 ) || (holidays_text != undefined) ) arrange_color = 'red'
+		else arrange_color = ''
+		output_day_name(day % 7)
 		output_day(date.format('D'), day % 7)
 		nameday = namedays[date.format('D.M.')]
 		if ( nameday != undefined) output_name(nameday, day % 7)
