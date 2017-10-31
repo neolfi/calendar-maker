@@ -111,6 +111,14 @@ function output_holidays_text( holidays_text, dayofweek ) {
 	fs.appendFileSync(outfilename, text) 
 }
 
+function output_month_name( date, dayofweek ) {
+	if ( date.format('D') != '1' ) return
+	var offset = 20 + 17 * dayofweek
+	var month_name = date.format('MMMM')
+	var text = '\\PlaceTextLeft{' + arrange_holidays_text_pos + 'mm}{' + offset + 'mm}{\\small{' + month_name + '}}\n'
+	fs.appendFileSync(outfilename, text) 
+}
+
 function output_photo( photo ) {
 	fs.appendFileSync(outfilename, '\\begin{tikzpicture}[remember picture,overlay]')
 	fs.appendFileSync(outfilename, '  \\node[outer sep=0pt,inner sep=0pt,anchor=north]')
@@ -148,6 +156,7 @@ function output_week( week ) {
 		output_day_name(day % 7)
 		if ( holidays_text != undefined ) output_holidays_text(holidays_text, day % 7)
 		output_day(date.format('D'), day % 7)
+		output_month_name(date, day % 7)
 		nameday = namedays[date.format('D.M.')]
 		if ( nameday != undefined) output_name(nameday, day % 7)
 		output_born(date, day % 7)
