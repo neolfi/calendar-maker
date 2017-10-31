@@ -4,6 +4,7 @@ var outfilename = 'output.tex'
 
 var arrange_template = 'templates/template-page-left.tex';
 var arrange_text_pos = 132;
+var arrange_holidays_text_pos = 194;
 var arrange_photo_pos = 67;
 var arrange_week_header_command = 'Right{15mm}'
 var arrange_color = ''
@@ -18,6 +19,7 @@ var holidays = require('./holidays.json')
 
 function set_output_left() {
 	arrange_template = 'templates/template-page-left.tex';
+	arrange_holidays_text_pos = 194;
 	arrange_text_pos = 132;
 	arrange_photo_pos = 67;
 	arrange_week_header_command = 'Right{15mm}'
@@ -26,6 +28,7 @@ function set_output_left() {
 function set_output_right() {
 	arrange_template = 'templates/template-page-right.tex';
 	arrange_text_pos = 25;
+	arrange_holidays_text_pos = 87;
 	arrange_photo_pos = 143;
 	arrange_week_header_command = 'Left{195mm}'
 }
@@ -71,6 +74,13 @@ function output_name( name, dayofweek ) {
 	fs.appendFileSync(outfilename, name) 
 }
 
+function output_holidays_text( holidays_text, dayofweek ) {
+	var offset = 31 + 17 * dayofweek
+	var color_holidays_text = set_color(holidays_text)
+	var text = '\\PlaceTextLeft{' + arrange_holidays_text_pos + 'mm}{' + offset + 'mm}{\\emph{\\tiny{' + color_holidays_text + '}}}\n'
+	fs.appendFileSync(outfilename, text) 
+}
+
 function output_photo( photo ) {
 	fs.appendFileSync(outfilename, '\\begin{tikzpicture}[remember picture,overlay]')
 	fs.appendFileSync(outfilename, '  \\node[outer sep=0pt,inner sep=0pt,anchor=north]')
@@ -106,6 +116,7 @@ function output_week( week ) {
 		if ( (day == 5) || (day == 6 ) || (holidays_text != undefined) ) arrange_color = 'red'
 		else arrange_color = ''
 		output_day_name(day % 7)
+		if ( holidays_text != undefined ) output_holidays_text(holidays_text, day % 7)
 		output_day(date.format('D'), day % 7)
 		nameday = namedays[date.format('D.M.')]
 		if ( nameday != undefined) output_name(nameday, day % 7)
