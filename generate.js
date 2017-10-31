@@ -19,6 +19,7 @@ var days = require('./days.json')
 var holidays = require('./holidays.json')
 var born = require('./born.json')
 var died = require('./died.json')
+var message = require('./message.json')
 
 function set_output_left() {
 	arrange_template = 'templates/template-page-left.tex';
@@ -95,6 +96,14 @@ function output_died( date, dayofweek ) {
 	fs.appendFileSync(outfilename, text) 
 }
 
+function output_message( date, dayofweek ) {
+	var message_text = message[date.format('D.M.')]
+	if ( message_text == undefined ) return
+	var offset = 31 + 17 * dayofweek
+	var text = '\\PlaceTextRight{' + arrange_msg_pos + 'mm}{' + offset + 'mm}{\\small{' + message_text + '}}\n'
+	fs.appendFileSync(outfilename, text) 
+}
+
 function output_holidays_text( holidays_text, dayofweek ) {
 	var offset = 31 + 17 * dayofweek
 	var color_holidays_text = set_color(holidays_text)
@@ -143,6 +152,7 @@ function output_week( week ) {
 		if ( nameday != undefined) output_name(nameday, day % 7)
 		output_born(date, day % 7)
 		output_died(date, day % 7)
+		output_message(date, day % 7)
 		date.add(1, 'days')
 	}
 	output_new_page()
