@@ -4,6 +4,7 @@ var outfilename = 'output.tex'
 
 var arrange_template = 'templates/template-page-left.tex';
 var arrange_text_pos = 132;
+var arrange_msg_pos = 143;
 var arrange_holidays_text_pos = 194;
 var arrange_photo_pos = 67;
 var arrange_week_header_command = 'Right{15mm}'
@@ -16,11 +17,14 @@ var namedays = require('./namedays.json')
 var photos = require('./photos.json')
 var days = require('./days.json')
 var holidays = require('./holidays.json')
+var born = require('./born.json')
+var died = require('./died.json')
 
 function set_output_left() {
 	arrange_template = 'templates/template-page-left.tex';
-	arrange_holidays_text_pos = 194;
 	arrange_text_pos = 132;
+	arrange_msg_pos = 143;
+	arrange_holidays_text_pos = 194;
 	arrange_photo_pos = 67;
 	arrange_week_header_command = 'Right{15mm}'
 }
@@ -28,6 +32,7 @@ function set_output_left() {
 function set_output_right() {
 	arrange_template = 'templates/template-page-right.tex';
 	arrange_text_pos = 25;
+	arrange_msg_pos = 36;
 	arrange_holidays_text_pos = 87;
 	arrange_photo_pos = 143;
 	arrange_week_header_command = 'Left{195mm}'
@@ -72,6 +77,22 @@ function output_name( name, dayofweek ) {
 	var color_name = set_color(name)
 	var name = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\emph{\\tiny{' + color_name + '}}}\n'
 	fs.appendFileSync(outfilename, name) 
+}
+
+function output_born( date, dayofweek ) {
+	var born_list = born[date.format('D.M.')]
+	if ( born_list == undefined ) return
+	var offset = 20 + 17 * dayofweek
+	var text = '\\PlaceTextRight{' + arrange_msg_pos + 'mm}{' + offset + 'mm}{\\textcolor{red}{\\small{*' + born_list + '}}}\n'
+	fs.appendFileSync(outfilename, text) 
+}
+
+function output_died( date, dayofweek ) {
+	var died_list = died[date.format('D.M.')]
+	if ( died_list == undefined ) return
+	var offset = 24 + 17 * dayofweek
+	var text = '\\PlaceTextRight{' + arrange_msg_pos + 'mm}{' + offset + 'mm}{\\small{\\textdagger ' + died_list + '}}\n'
+	fs.appendFileSync(outfilename, text) 
 }
 
 function output_holidays_text( holidays_text, dayofweek ) {
@@ -120,6 +141,8 @@ function output_week( week ) {
 		output_day(date.format('D'), day % 7)
 		nameday = namedays[date.format('D.M.')]
 		if ( nameday != undefined) output_name(nameday, day % 7)
+		output_born(date, day % 7)
+		output_died(date, day % 7)
 		date.add(1, 'days')
 	}
 	output_new_page()
