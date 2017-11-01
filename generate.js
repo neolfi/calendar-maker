@@ -133,7 +133,7 @@ function output_new_page() {
 }
 
 function get_week( week ) {
-	var date = moment("2017-01-01");
+	var date = moment("2018-01-01");
 	var startweekday = date.weekday()
 	date.add(-startweekday + week*7, 'days')
 	return date
@@ -151,7 +151,7 @@ function output_week( week ) {
 	for(var day = 0 ; day < 7; day++ )
 	{
 		var holidays_text = holidays[date.format('D.M.')]
-		if ( (day == 5) || (day == 6 ) || (holidays_text != undefined) ) arrange_color = 'red'
+		if ( (day == 6) || (holidays_text != undefined) ) arrange_color = 'blue'
 		else arrange_color = ''
 		output_day_name(day % 7)
 		if ( holidays_text != undefined ) output_holidays_text(holidays_text, day % 7)
