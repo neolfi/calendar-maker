@@ -7,7 +7,7 @@ apt-get install nodejs npm texlive texlive-lang-czechslovak texlive-latex-extra 
 
 Fedora
 ------
-dnf install texlive-adjustbox texlive-babel-czech xpdf
+dnf install texlive-adjustbox texlive-babel-czech xpdf texlive-pdfpages
 
 Common
 ------
