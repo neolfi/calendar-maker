@@ -13,13 +13,14 @@ var arrange_color = ''
 var moment = require('moment');
 require('moment/locale/cs')
 
-var namedays = require('./namedays.json')
-var photos = require('./photos.json')
-var days = require('./days.json')
-var holidays = require('./holidays.json')
-var born = require('./born.json')
-var died = require('./died.json')
-var message = require('./message.json')
+var config = require('./config.json')
+var namedays = require('./locales/' + config['locale'] + '/namedays.json')
+var days = require('./locales/' + config['locale'] + '/days.json')
+var holidays = require('./locales/' + config['locale'] + '/holidays.json')
+var photos = require(config['personalization'] + '/photos.json')
+var born = require(config['personalization'] + '/born.json')
+var died = require(config['personalization'] + '/died.json')
+var message = require(config['personalization'] + '/message.json')
 
 function set_output_left() {
 	arrange_template = 'templates/template-page-left.tex';
@@ -133,7 +134,7 @@ function output_new_page() {
 }
 
 function get_week( week ) {
-	var date = moment("2018-01-01");
+	var date = moment(config['year'] + "-01-01");
 	var startweekday = date.weekday()
 	date.add(-startweekday + week*7, 'days')
 	return date
@@ -151,7 +152,7 @@ function output_week( week ) {
 	for(var day = 0 ; day < 7; day++ )
 	{
 		var holidays_text = holidays[date.format('D.M.')]
-		if ( (day == 6) || (holidays_text != undefined) ) arrange_color = 'blue'
+		if ( (day == 6) || (holidays_text != undefined) ) arrange_color = config['holidays-color']
 		else arrange_color = ''
 		output_day_name(day % 7)
 		if ( holidays_text != undefined ) output_holidays_text(holidays_text, day % 7)
@@ -185,8 +186,6 @@ for ( var week = 0; week < 26; week+=2 ) {
 	output_week( 51-week );
 	output_week( 51-week-1 );
 }
-
-
 
 file = fs.readFileSync('templates/template-footer.tex', {encoding: 'utf8'})
 fs.appendFileSync(outfilename, file)
