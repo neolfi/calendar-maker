@@ -1,2 +1,0 @@
-How to draw line in LaTeX
-- https://tex.stackexchange.com/questions/48214/drawing-a-line-between-two-points
