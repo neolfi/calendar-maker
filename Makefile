@@ -22,7 +22,10 @@ install:
 	cp generate.js calendar-maker ${INSTALL_PATH}
 	ln -s ${INSTALL_PATH}/calendar-maker /usr/bin/calendar-maker
 	npm install -g moment
-	npm install -g
+	npm install -g calendar-base
+	npm install -g generate-weeks
+	npm install -g glob-fs
+	npm install -g weekz
 
 uninstall:
 	rm -Rf ${INSTALL_PATH}
