@@ -1,0 +1,34 @@
+{
+  "name": "calendar-maker",
+  "version": "0.1.0",
+  "description": "Generate printable weekly calendar with custom events and photos.",
+  "main": "generate.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "calendar-base": "^0.3.0",
+    "generate-weeks": "^1.0.3",
+    "moment": "^2.18.1",
+    "weekz": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neolfi/calendar-maker.git"
+  },
+  "keywords": [
+    "calendar",
+    "printable",
+    "week"
+  ],
+  "author": "Jan Zizka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neolfi/calendar-maker/issues"
+  },
+  "homepage": "https://github.com/neolfi/calendar-maker#readme"
+}
