@@ -14,3 +14,13 @@ output-a4.pdf: output.pdf
 
 clean:
 	rm -f output.* output-a4.pdf output-a4.log output-a4.aux
+
+INSTALL_PATH=/usr/lib/calendar-maker
+install:
+	mkdir -p ${INSTALL_PATH}
+	cp -r locale example templates ${INSTALL_PATH} 
+	cp generate.js calendar-maker ${INSTALL_PAHT}
+	npm install -g
+
+uninstall:
+	rm -R ${INSTALL_PATH}
