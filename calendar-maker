@@ -25,8 +25,11 @@ copy_example message.json
 
 # Convert photos to 300 DPI and max 104x112 mm
 # 300 DPI is 11.811 dots-per-millimeter
+# Only photos starting with '2' are modified
+# those are week photos
 cd photos
-mogrify -density 300 -resize 1228x1322 *
+mogrify -density 300 -resize 1228x1322 ./2*
+mogrify -density 300 -resize 2456x1322 ./front-page.*
 cd ..
 
 node $MY_PATH/generate.js
