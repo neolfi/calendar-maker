@@ -11,6 +11,12 @@ fi
 mkdir -p output
 mkdir -p photos
 
+# Convert photos to 300 DPI and max 104x112 mm
+# 300 DPI is 11.811 dots-per-millimeter
+cd photos
+mogrify -density 300 -resize 1228x1322 *
+cd ..
+
 node $MY_PATH/generate.js
 cd output
 pdflatex output.tex

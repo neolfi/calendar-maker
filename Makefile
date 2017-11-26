@@ -18,9 +18,9 @@ clean:
 INSTALL_PATH=/usr/lib/calendar-maker
 install:
 	mkdir -p ${INSTALL_PATH}
-	cp -r locale example templates ${INSTALL_PATH} 
-	cp generate.js calendar-maker ${INSTALL_PAHT}
-	npm install -g
+	cp -r locales example templates ${INSTALL_PATH} 
+	cp generate.js calendar-maker ${INSTALL_PATH}
+	npm install -g moment
 
 uninstall:
 	rm -R ${INSTALL_PATH}
