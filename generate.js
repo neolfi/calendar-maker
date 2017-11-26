@@ -131,7 +131,7 @@ function output_photo( photo ) {
 	fs.appendFileSync(outfilename, '\\begin{tikzpicture}[remember picture,overlay]')
 	fs.appendFileSync(outfilename, '  \\node[outer sep=0pt,inner sep=0pt,anchor=north]')
 	fs.appendFileSync(outfilename, '    at ([xshift=' + arrange_photo_pos + 'mm,yshift=-26mm]current page.north west)')
-	fs.appendFileSync(outfilename, '    {\\includegraphics[max width=104mm, max height=112mm]{' + photo + '}};')
+	fs.appendFileSync(outfilename, '    {\\includegraphics[max width=104mm, max height=112mm]{../' + photo + '}};')
 	fs.appendFileSync(outfilename, '\\end{tikzpicture}')
 }
 
