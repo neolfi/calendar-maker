@@ -20,7 +20,10 @@ install:
 	mkdir -p ${INSTALL_PATH}
 	cp -r locales example templates ${INSTALL_PATH} 
 	cp generate.js calendar-maker ${INSTALL_PATH}
+	ln -s ${INSTALL_PATH}/calendar-maker /usr/bin/calendar-maker
 	npm install -g moment
+	npm install -g
 
 uninstall:
-	rm -R ${INSTALL_PATH}
+	rm -Rf ${INSTALL_PATH}
+	rm -f /usr/bin/calendar-maker
