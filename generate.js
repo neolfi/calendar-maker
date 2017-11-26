@@ -195,13 +195,15 @@ if ( date.week() == 52 ) {
 	output_week( 52 );
 }
 
-for ( var week = 0; week < 26; week+=2 ) {
+
+for ( var week = 0; week < 26; week+=1 ) {
 	set_output_left();
 	output_week( week );
-	output_week( week+1 );
+	if ( config['page-format'] == 'a4' ) output_week( week+1 );
 	set_output_right();
 	output_week( 51-week );
-	output_week( 51-week-1 );
+	if ( config['page-format'] == 'a4' ) output_week( 51-week-1 );
+	if ( config['page-format'] == 'a4' ) week++
 }
 
 file = fs.readFileSync(install_path + '/templates/template-footer.tex', {encoding: 'utf8'})
