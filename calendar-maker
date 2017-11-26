@@ -8,9 +8,16 @@ function copy_example() {
 	fi
 }
 
+function copy_photos_readme() {
+	if [ ! -f ./photos/00-PHOTOSREADME ]; then
+		cp $MY_PATH/templates/00-PHOTOSREADME ./photos/.
+	fi
+}
+
 # Create basic configuration if it doesn't exist already
 mkdir -p output
 mkdir -p photos
+copy_photos_readme
 copy_example config.json
 copy_example born.json
 copy_example died.json

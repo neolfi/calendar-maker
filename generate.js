@@ -128,16 +128,48 @@ function output_photo( photo ) {
 		console.log('Warning: photo ' + photo + ' file doesn\'t exit!')
 		return
 	}
-	fs.appendFileSync(outfilename, '\\begin{tikzpicture}[remember picture,overlay]')
-	fs.appendFileSync(outfilename, '  \\node[outer sep=0pt,inner sep=0pt,anchor=north]')
-	fs.appendFileSync(outfilename, '    at ([xshift=' + arrange_photo_pos + 'mm,yshift=-26mm]current page.north west)')
-	fs.appendFileSync(outfilename, '    {\\includegraphics[max width=104mm, max height=112mm]{../' + photo + '}};')
-	fs.appendFileSync(outfilename, '\\end{tikzpicture}')
+	fs.appendFileSync(outfilename, '\\begin{tikzpicture}[remember picture,overlay]\n')
+	fs.appendFileSync(outfilename, '  \\node[outer sep=0pt,inner sep=0pt,anchor=north]\n')
+	fs.appendFileSync(outfilename, '    at ([xshift=' + arrange_photo_pos + 'mm,yshift=-26mm]current page.north west)\n')
+	fs.appendFileSync(outfilename, '    {\\includegraphics[max width=104mm, max height=112mm]{../' + photo + '}};\n')
+	fs.appendFileSync(outfilename, '\\end{tikzpicture}\n')
 }
 
+function output_front_page_photo( ) {
+	var photo = get_photo( 'front-page' )
+	var photo_fs = require('fs')
+	if ( ! photo_fs.existsSync(photo) ) {
+		console.log('Warning: photo ' + photo + ' file doesn\'t exit!')
+		return
+	}
+	fs.appendFileSync(outfilename, '\\begin{tikzpicture}[remember picture,overlay]\n')
+	fs.appendFileSync(outfilename, '  \\node[outer sep=0pt,inner sep=0pt,anchor=north]\n')
+	fs.appendFileSync(outfilename, '    at ([xshift=105mm,yshift=-26mm]current page.north west)\n')
+	fs.appendFileSync(outfilename, '    {\\includegraphics[max width=200mm, max height=112mm]{../' + photo + '}};\n')
+	fs.appendFileSync(outfilename, '\\end{tikzpicture}\n')
+}
 
 function output_new_page() {
-	fs.appendFileSync(outfilename, '\\newpage')
+	fs.appendFileSync(outfilename, '\\newpage\n')
+}
+
+function output_blank_page() {
+	fs.appendFileSync(outfilename, '\\blankpage\n')
+}
+
+function output_front_page() {
+	var year = '\\PlaceText{105mm}{20mm}{\\Huge{' + config['year'] + '}}\n'
+	fs.appendFileSync(outfilename, year)
+
+	output_front_page_photo()
+
+	output_new_page()
+	output_blank_page()
+
+	if ( config['page-format'] == 'a4' ) {
+		output_blank_page()
+		output_blank_page()
+	}
 }
 
 function get_week( week ) {
@@ -149,22 +181,26 @@ function get_week( week ) {
 
 function pad(num, size){ return ('000000000' + num).substr(-size); }
 
-function get_photo( date, week ) {
+function get_photo( filename ) {
 	var glob = require('glob-fs')({ gitignore: true });
-	var photo_name = 'photos/' + date.format('Y-') + pad( (week+1).toString(), 2) + '.*'
+	var photo_name = 'photos/' + filename + '.*'
 	var files = glob.readdirSync(photo_name);
 	console.log('Photos ' + photo_name + ' ' + files.toString())
 	if ( files == undefined ) return undefined
 	return files[0]
 }
 
+function get_week_photo( date, week ) {
+	var photo_name = date.format('Y-') + pad( (week+1).toString(), 2)
+	return get_photo( photo_name )
+}
 
 function output_week( week ) {
 	var date = get_week( week );
 
 	output_template()
 	output_week_header( week )
-	photo = get_photo(date, week)
+	photo = get_week_photo(date, week)
 	if ( photo != undefined ) output_photo(photo)
 	for(var day = 0 ; day < 7; day++ )
 	{
@@ -189,12 +225,13 @@ function output_week( week ) {
 file = fs.readFileSync(install_path + '/templates/template-header.tex', {encoding: 'utf8'})
 fs.writeFileSync(outfilename, file)
 
+output_front_page()
+
 date = get_week( 0 );
 if ( date.week() == 52 ) {
 	set_output_right();
 	output_week( 52 );
 }
-
 
 for ( var week = 0; week < 26; week+=1 ) {
 	set_output_left();
