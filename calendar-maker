@@ -8,8 +8,19 @@ if [ -z "$MY_PATH" ] ; then
 	exit 1  # fail
 fi
 
+function copy_example() {
+	if [ ! -f ./$1 ]; then
+		cp $MY_PATH/example/$1 .
+	fi
+}
+
+# Create basic configuration if it doesn't exist already
 mkdir -p output
 mkdir -p photos
+copy_example config.json
+copy_example born.json
+copy_example died.json
+copy_example message.json
 
 # Convert photos to 300 DPI and max 104x112 mm
 # 300 DPI is 11.811 dots-per-millimeter
