@@ -15,6 +15,7 @@ function copy_photos_readme() {
 }
 
 # Create basic configuration if it doesn't exist already
+echo "Updating templates..."
 mkdir -p output
 mkdir -p photos
 copy_photos_readme
@@ -27,14 +28,22 @@ copy_example message.json
 # 300 DPI is 11.811 dots-per-millimeter
 # Only photos starting with '2' are modified
 # those are week photos
+echo "Converting images..."
 cd photos
-mogrify -density 300 -resize 1228x1322 ./2*
-mogrify -density 300 -resize 2456x1322 ./front-page.*
+mogrify -density 300 -resize 1228x1322 ./2* > ../output/photos.log 2>&1
+mogrify -density 300 -resize 2456x1322 ./front-page.* >> ../output/photos.log 2>&1
 cd ..
 
-node $MY_PATH/generate.js
+echo "Generating TeX..."
+node $MY_PATH/generate.js > output/generate.log 2>&1
+
+echo "Creating PDF (may take couple minutes)..."
 cd output
-pdflatex output.tex
-pdflatex output.tex
-cp $MY_PATH/templates/output-a4.tex .
-pdflatex output-a4.tex
+pdflatex output.tex > output-term.log 2>&1
+pdflatex output.tex >> output-term.log 2>&1
+
+# Generate also A4, uncomment if needed
+#cp $MY_PATH/templates/output-a4.tex .
+#pdflatex output-a4.tex
+
+echo "All done."
