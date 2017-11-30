@@ -35,6 +35,7 @@ mogrify -density 300 -resize 2456x1322 ./front-page.* >> ../output/photos.log 2>
 cd ..
 
 echo "Generating TeX..."
+export NODE_PATH=$(npm root --quite -g)
 node $MY_PATH/generate.js > output/generate.log 2>&1
 
 echo "Creating PDF (may take couple minutes)..."
