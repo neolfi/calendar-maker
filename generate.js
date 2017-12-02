@@ -179,6 +179,13 @@ function get_week( week ) {
         return date
 }
 
+function get_last_week( ) {
+        var date = moment(config['year'] + "-12-31");
+        var startweekday = date.weekday()
+        date.add(6-startweekday , 'days')
+        return date
+}
+
 function pad(num, size){ return ('000000000' + num).substr(-size); }
 
 function get_photo( filename ) {
@@ -190,8 +197,10 @@ function get_photo( filename ) {
         return files[0]
 }
 
-function get_week_photo( date, week ) {
-        var photo_name = date.format('Y-') + pad( (week+1).toString(), 2)
+function get_week_photo( date ) {
+        var date_last = moment(date)
+        date_last.add(6, 'days')
+        var photo_name = date_last.format('Y-') + pad(date_last.week().toString(), 2)
         return get_photo( photo_name )
 }
 
@@ -200,7 +209,7 @@ function output_week( week ) {
 
         output_template()
         output_week_header( week )
-        photo = get_week_photo(date, week)
+        photo = get_week_photo(date)
         if ( photo != undefined ) output_photo(photo)
         for(var day = 0 ; day < 7; day++ )
         {
@@ -227,19 +236,30 @@ fs.writeFileSync(outfilename, file)
 
 output_front_page()
 
-date = get_week( 0 );
-if ( date.week() == 52 ) {
-        set_output_right();
-        output_week( 52 );
+function get_weeks_in_year() {
+    var start = get_week(0).week()
+    var end = get_last_week().week()
+    var weeks = 52
+    if ( start == 52 ) weeks++
+    if ( end == 1 ) weeks++
+    return weeks
 }
 
-for ( var week = 0; week < 26; week+=1 ) {
+var weeks = get_weeks_in_year()
+
+console.log("Number of weeks: " + weeks.toString())
+
+if ( weeks % 2 == 1) weeks++
+
+console.log("Number of weeks: " + weeks.toString())
+
+for ( var week = 0; week < weeks/2; week+=1 ) {
         set_output_left();
         output_week( week );
         if ( config['page-format'] == 'a4' ) output_week( week+1 );
         set_output_right();
-        output_week( 51-week );
-        if ( config['page-format'] == 'a4' ) output_week( 51-week-1 );
+        output_week( weeks-week-1 );
+        if ( config['page-format'] == 'a4' ) output_week( weeks-week-2 );
         if ( config['page-format'] == 'a4' ) week++
 }
 
