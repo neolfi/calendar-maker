@@ -1,11 +1,37 @@
+What to do?
+===========
+
+Place all photos into this "photos" directory and rename them
+according to below conventions. The file extensions can stay
+same as original file name.
+
+All formats which are supported by PDF are supported, namely
+JPEG, PNG.
+
+Photos are rescaled so that resulting PDF is not extensively huge.
+The rescaling is done with 300 DPI.
+
+
 Front page photo
 ----------------
 
-Filename: front-page.*
-Example:  frong-pate.jpg
+There is one photo on front page which is covering whole page.
+
+Filename template: front-page.*
+Example:           front-page.jpg
+
 
 Week photos
 -----------
 
-Filename: YYYY-WW.*
-Example:  2018-03.jpg
+Every week page contains one photo, it covers half of the page
+either on the left or right depend on the side on which it it
+printed, this allows to cut the calendar so that one can keep
+photos and throw away the old calendar days.
+
+The photos have to be named according to below template where
+YYYY is year and WW is week of the year. Week has to have leading
+zeros so week 3 has to be named as 03.
+
+Filename template: YYYY-WW.*
+Example:           2018-03.jpg
