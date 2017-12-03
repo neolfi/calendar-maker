@@ -100,6 +100,9 @@ function output_died( date, dayofweek ) {
 }
 
 function output_message( date, dayofweek ) {
+	// Output message only for the calendar year, do not duplicate
+	// for previous and next year.
+	if ( date.format('YYYY') != config['year'] ) return
         var message_text = message[date.format('D.M.')]
         if ( message_text == undefined ) return
         var offset = 31 + 17 * dayofweek
