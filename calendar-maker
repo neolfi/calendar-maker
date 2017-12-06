@@ -8,6 +8,15 @@ function copy_example() {
 	fi
 }
 
+function make_empty_json() {
+	if [ ! -f ./$1 ]; then
+		cat > $1 << EOF
+{
+}
+EOF
+	fi
+}
+
 function copy_photos_readme() {
 	if [ ! -f ./photos/00-PHOTOSREADME ]; then
 		cp $MY_PATH/templates/00-PHOTOSREADME ./photos/.
@@ -20,9 +29,9 @@ mkdir -p output
 mkdir -p photos
 copy_photos_readme
 copy_example config.json
-copy_example born.json
-copy_example died.json
-copy_example message.json
+make_empty_json born.json
+make_empty_json died.json
+make_empty_json message.json
 
 # Convert photos to 300 DPI and max 104x112 mm
 # 300 DPI is 11.811 dots-per-millimeter
