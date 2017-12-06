@@ -167,7 +167,7 @@ function output_front_page() {
         output_front_page_photo()
 
         output_new_page()
-	if (config['order'] != 'linear' ) {
+	if (config['order'] == 'doublesided' ) {
 		output_blank_page()
 	}
 
@@ -258,7 +258,7 @@ if ( weeks % 2 == 1) weeks++
 
 console.log("Number of weeks: " + weeks.toString())
 
-if ( config['order'] == 'linear' ) {
+if ( config['order'] != 'doublesided' ) {
 	set_output_left();
 	for ( var week = 0; week < weeks/2; week+=1 ) {
 		output_week( week );
