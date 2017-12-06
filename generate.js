@@ -13,9 +13,6 @@ var arrange_photo_pos = 67;
 var arrange_week_header_command = 'Right{15mm}'
 var arrange_color = ''
 
-var moment = require('moment');
-require('moment/locale/cs')
-
 var config = require(run_path + '/config.json')
 var namedays = require(install_path + '/locales/' + config['locale'] + '/namedays.json')
 var days = require(install_path + '/locales/' + config['locale'] + '/days.json')
@@ -23,6 +20,19 @@ var holidays = require(install_path + '/locales/' + config['locale'] + '/holiday
 var born = require(run_path + '/born.json')
 var died = require(run_path + '/died.json')
 var message = require(run_path + '/message.json')
+
+var moment_locale = {
+	'czech':'cs',
+	'finnish':'fi'
+}
+
+var week_locale = {
+	'czech':'týden',
+	'finnish':'viikko'
+}
+
+var moment = require('moment');
+require('moment/locale/' + moment_locale[config['locale']])
 
 function set_output_left() {
         arrange_template = install_path + '/templates/template-page-left.tex';
@@ -53,7 +63,7 @@ function output_week_header( week ) {
         var week_num = date.week();
         date.add(6, 'days')
         if ( month != date.format('MMMM Y') ) month += ' / ' + date.format('MMMM Y')
-        var header = '\\PlaceText' + arrange_week_header_command + '{18mm}{' + month + ' / ' + week_num + '. týden}'
+        var header = '\\PlaceText' + arrange_week_header_command + '{18mm}{' + month + ' / ' + week_num + '. ' + week_locale[config['locale']] + '}'
         fs.appendFileSync(outfilename, header)
 }
 
