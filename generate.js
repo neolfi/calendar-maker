@@ -167,7 +167,9 @@ function output_front_page() {
         output_front_page_photo()
 
         output_new_page()
-        output_blank_page()
+	if (config['order'] != 'linear' ) {
+		output_blank_page()
+	}
 
         if ( config['page-format'] == 'a4' ) {
                 output_blank_page()
@@ -256,14 +258,28 @@ if ( weeks % 2 == 1) weeks++
 
 console.log("Number of weeks: " + weeks.toString())
 
-for ( var week = 0; week < weeks/2; week+=1 ) {
-        set_output_left();
-        output_week( week );
-        if ( config['page-format'] == 'a4' ) output_week( week+1 );
-        set_output_right();
-        output_week( weeks-week-1 );
-        if ( config['page-format'] == 'a4' ) output_week( weeks-week-2 );
-        if ( config['page-format'] == 'a4' ) week++
+if ( config['order'] == 'linear' ) {
+	set_output_left();
+	for ( var week = 0; week < weeks/2; week+=1 ) {
+		output_week( week );
+	}
+	set_output_right();
+	for ( var week = weeks/2; week < weeks; week+=1 ) {
+		output_week( week );
+	}
+	output_blank_page()
+} 
+else
+{
+	for ( var week = 0; week < weeks/2; week+=1 ) {
+		set_output_left();
+		output_week( week );
+		if ( config['page-format'] == 'a4' ) output_week( week+1 );
+		set_output_right();
+		output_week( weeks-week-1 );
+		if ( config['page-format'] == 'a4' ) output_week( weeks-week-2 );
+		if ( config['page-format'] == 'a4' ) week++
+	}
 }
 
 file = fs.readFileSync(install_path + '/templates/template-footer.tex', {encoding: 'utf8'})

@@ -2,5 +2,6 @@
 	"year": "2018",
 	"holidays-color": "blue",
 	"locale": "czech",
-	"page-format": "a5"
+	"page-format": "a5",
+	"order": "linear"
 }
