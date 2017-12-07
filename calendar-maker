@@ -32,6 +32,7 @@ copy_example config.json
 make_empty_json born.json
 make_empty_json died.json
 make_empty_json message.json
+make_empty_json holidays_local.json
 
 # Convert photos to 300 DPI and max 104x112 mm
 # 300 DPI is 11.811 dots-per-millimeter

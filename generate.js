@@ -17,6 +17,7 @@ var config = require(run_path + '/config.json')
 var namedays = require(install_path + '/locales/' + config['locale'] + '/namedays.json')
 var days = require(install_path + '/locales/' + config['locale'] + '/days.json')
 var holidays = require(install_path + '/locales/' + config['locale'] + '/holidays.json')
+var holidays_local = require(run_path + '/holidays_local.json')
 var born = require(run_path + '/born.json')
 var died = require(run_path + '/died.json')
 var message = require(run_path + '/message.json')
@@ -228,7 +229,10 @@ function output_week( week ) {
         if ( photo != undefined ) output_photo(photo)
         for(var day = 0 ; day < 7; day++ )
         {
-                var holidays_text = holidays[date.format('D.M.')]
+                var holidays_text = holidays_local[date.format('D.M.')]
+		if ( holidays_text == undefined ) {
+                	holidays_text = holidays[date.format('D.M.')]
+		}
                 if ( (day == 6) || (holidays_text != undefined) ) arrange_color = config['holidays-color']
                 else arrange_color = ''
                 output_day_name(day % 7)
