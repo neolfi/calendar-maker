@@ -97,8 +97,8 @@ function output_day( day, dayofweek ) {
     }
     else
     {
-        var pos = arrange_text_pos - 10
-        date = '\\PlaceTextRight{' + pos + 'mm}{' + offset + 'mm}{\\huge{' + color_day + '}}\n'
+        var pos = arrange_text_pos
+        date = '\\PlaceTextLeft{' + pos + 'mm}{' + offset + 'mm}{\\huge{' + color_day + '}}\n'
     }
     fs.appendFileSync(outfilename, date)
 }
