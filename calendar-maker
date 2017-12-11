@@ -33,6 +33,7 @@ make_empty_json born.json
 make_empty_json died.json
 make_empty_json message.json
 make_empty_json holidays_local.json
+DIRNAME=`basename "$PWD" | sed -e 's/ /-/g'`
 
 # Convert photos to 300 DPI and max 104x112 mm
 # 300 DPI is 11.811 dots-per-millimeter
@@ -56,5 +57,8 @@ pdflatex output.tex >> output-term.log 2>&1
 # Generate also A4, uncomment if needed
 #cp $MY_PATH/templates/output-a4.tex .
 #pdflatex output-a4.tex
+
+# Rename output file to be same name as top level directory name
+mv output.pdf $DIRNAME.pdf
 
 echo "All done."
