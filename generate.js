@@ -32,6 +32,11 @@ var week_locale = {
     'finnish':'viikko'
 }
 
+var born_died_offset = {
+    'czech':0,
+    'finnish':6
+}
+
 var moment = require('moment');
 require('moment/locale/' + moment_locale[config['locale']])
 
@@ -121,7 +126,8 @@ function output_born( date, dayofweek ) {
     var born_list = born[date.format('D.M.')]
     if ( born_list == undefined ) return
     var offset = 20 + 17 * dayofweek
-    var text = '\\PlaceTextRight{' + arrange_msg_pos + 'mm}{' + offset + 'mm}{\\textcolor{red}{\\small{*' + born_list + '}}}\n'
+    var xpos = arrange_msg_pos + born_died_offset[config['locale']]
+    var text = '\\PlaceTextRight{' + xpos + 'mm}{' + offset + 'mm}{\\textcolor{red}{\\small{*' + born_list + '}}}\n'
     fs.appendFileSync(outfilename, text) 
 }
 
@@ -129,7 +135,8 @@ function output_died( date, dayofweek ) {
     var died_list = died[date.format('D.M.')]
     if ( died_list == undefined ) return
     var offset = 24 + 17 * dayofweek
-    var text = '\\PlaceTextRight{' + arrange_msg_pos + 'mm}{' + offset + 'mm}{\\small{\\textdagger ' + died_list + '}}\n'
+    var xpos = arrange_msg_pos + born_died_offset[config['locale']]
+    var text = '\\PlaceTextRight{' + xpos + 'mm}{' + offset + 'mm}{\\small{\\textdagger ' + died_list + '}}\n'
     fs.appendFileSync(outfilename, text) 
 }
 
