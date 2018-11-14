@@ -34,6 +34,18 @@ dnf install -y nodejs ImageMagick texlive-adjustbox texlive-babel-czech xpdf tex
                texlive-mfware texlive-metafont git 
 ```
 
+WIP Docker
+==========
+
+There is experimented Dockerfile, you can create container which will install all dependencies
+and `calendar-maker` and will run it on `/work` directory:
+
+```
+sudo docker build -t calendar-maker .
+sudo docker run -it --user $UID -v $PWD/tmp:/work calendar-maker
+```
+
+However this doesn't work as the USER is not set in the container. Will fix that soon.
 
 Install
 =======
