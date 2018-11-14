@@ -14,12 +14,26 @@ risk.
 Prerequisities
 ==============
 
-For Fedora:
+For Fedora 29.
+
+A convenient way to run the `calendar-maker` is inside a `docker` container.
+Map current diretory to `/work` directory in docker container to use as persistent
+storage:
 
 ```
-dnf install nodejs ImageMagick texlive-adjustbox texlive-babel-czech xpdf texlive-pdfpages \
-            texlive-mfware texlive-metafont 
+sudo dnf install -y docker
+sudo systemctl start docker
+sudo docker run -it -v $PWD:/work fedora /bin/bash
 ```
+
+In container or in your host:
+
+```
+echo -ne 'fastestmirror=true' >> /etc/dnf/dnf.conf
+dnf install -y nodejs ImageMagick texlive-adjustbox texlive-babel-czech xpdf texlive-pdfpages \
+               texlive-mfware texlive-metafont git 
+```
+
 
 Install
 =======
@@ -35,6 +49,14 @@ Use
 ===
 
 1. Create working directory
+
+If you are using `docker` container the go to mapped `/work` directory:
+
+```
+cd /work
+```
+
+then create your calendar directory:
 
 ```
 mkdir my-calendar
