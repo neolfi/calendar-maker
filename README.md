@@ -4,7 +4,7 @@ calendar-maker
 The `calendar-maker` is small tool to generate printable weekly calendar
 with custom photos, messages etc.
 
-The engine is implemented with Node.js and it generates LaTeX file which
+The engine is implemented in Node.js and it generates LaTeX file which
 is then translated to PDF. There are bunch of LaTeX packages used and
 there are page templates used by engine.
 
@@ -14,34 +14,21 @@ risk.
 Prerequisities
 ==============
 
-Ubuntu
-------
-apt-get install nodejs npm texlive texlive-lang-czechslovak texlive-latex-extra xpdf
+For Fedora:
 
-Fedora
-------
-dnf install texlive-adjustbox texlive-babel-czech xpdf texlive-pdfpages
-
-Common
-------
-npm install moment
+```
+dnf install nodejs ImageMagick texlive-adjustbox texlive-babel-czech xpdf texlive-pdfpages \
+            texlive-mfware texlive-metafont 
+```
 
 Install
 =======
 
 ```
-sudo make install
-```
-
-This will install into `/usr/lib/calendar-maker` and it will try to install globaly
-needed nodejs modules. This is note very clever and may fail for various reasons like
-wrong permissions etc.
-
-Uninstall
-=========
-
-```
-sudo make uninstall
+git clone https://github.com/neolfi/calendar-maker.git
+cd calendar-maker
+npm install .
+export PATH=$PATH:$PWD
 ```
 
 Use
@@ -89,4 +76,4 @@ photos:
 Configuration
 =============
 
-For the configuration examples look at `/usr/lib/calendar-maker/example/*` or into code :-)
+For the configuration examples look at `calendar-maker/example/*` or into code :-)

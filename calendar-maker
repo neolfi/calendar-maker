@@ -1,6 +1,7 @@
 #!/bin/bash
 
-MY_PATH=/usr/lib/calendar-maker
+MY_SCRIPT=`realpath $0`
+MY_PATH=`dirname $MY_SCRIPT`
 
 function copy_example() {
 	if [ ! -f ./$1 ]; then
@@ -46,7 +47,7 @@ mogrify -density 300 -resize 2456x1322 ./front-page.* >> ../output/photos.log 2>
 cd ..
 
 echo "Generating TeX..."
-export NODE_PATH=$(npm root --quite -g)
+export NODE_PATH=$MY_PAHT/node_modules
 node $MY_PATH/generate.js > output/generate.log 2>&1
 
 echo "Creating PDF (may take couple minutes)..."
