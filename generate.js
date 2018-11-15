@@ -83,12 +83,12 @@ function output_day_name( dayofweek ) {
     var color_day_name = set_color(days[dayofweek.toString()])
     var name = ''
     if ( config['day-label-align'] != 'left' ) {
-        name = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\small{' + color_day_name + '}}\n'
+        name = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\textbf{\\small{' + color_day_name + '}}}\n'
     }
     else
     {
         var pos = arrange_text_pos - 10
-        name = '\\PlaceTextRight{' + pos + 'mm}{' + offset + 'mm}{\\small{' + color_day_name + '}}\n'
+        name = '\\PlaceTextRight{' + pos + 'mm}{' + offset + 'mm}{\\textbf{\\small{' + color_day_name + '}}}\n'
     }
     fs.appendFileSync(outfilename, name)
 }
@@ -98,12 +98,12 @@ function output_day( day, dayofweek ) {
     var color_day = set_color(day)
     var date = ''
     if ( config['day-label-align'] != 'left' ) {
-        date = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\huge{' + color_day + '}}\n'
+        date = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\textbf{\\huge{' + color_day + '}}}\n'
     }
     else
     {
         var pos = arrange_text_pos
-        date = '\\PlaceTextLeft{' + pos + 'mm}{' + offset + 'mm}{\\huge{' + color_day + '}}\n'
+        date = '\\PlaceTextLeft{' + pos + 'mm}{' + offset + 'mm}{\\textbf{\\huge{' + color_day + '}}}\n'
     }
     fs.appendFileSync(outfilename, date)
 }
@@ -112,12 +112,12 @@ function output_name( name, dayofweek ) {
     var offset = 31 + 17 * dayofweek
     var color_name = set_color(name)
     if ( config['day-label-align'] != 'left' ) {
-        name = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\emph{\\tiny{' + color_name + '}}}\n'
+        name = '\\PlaceText{' + arrange_text_pos + 'mm}{' + offset + 'mm}{\\emph{\\textbf{\\small{' + color_name + '}}}}\n'
     }
     else
     {
         var pos = arrange_text_pos - 10
-        name = '\\PlaceTextRight{' + pos + 'mm}{' + offset + 'mm}{\\emph{\\tiny{' + color_name + '}}}\n'
+        name = '\\PlaceTextRight{' + pos + 'mm}{' + offset + 'mm}{\\emph{\\textbf{\\small{' + color_name + '}}}}\n'
     }
     fs.appendFileSync(outfilename, name) 
 }
