@@ -17,16 +17,11 @@ Prerequisities
 For Fedora 29.
 
 A convenient way to run the `calendar-maker` is inside a `docker` container.
-Map current diretory to `/work` directory in docker container to use as persistent
-storage:
+Install `docker` using instructions for your OS https://docs.docker.com/install/linux/docker-ce/fedora/.
+After that follow `Install into Docker container`.
 
-```
-sudo dnf install -y docker
-sudo systemctl start docker
-sudo docker run -it -v $PWD:/work fedora /bin/bash
-```
-
-In container or in your host:
+If you want to run `calendar-maker` locally in your host you will need further
+packages:
 
 ```
 echo -ne 'fastestmirror=true' >> /etc/dnf/dnf.conf
@@ -34,26 +29,25 @@ dnf install -y nodejs ImageMagick texlive-adjustbox texlive-babel-czech xpdf tex
                texlive-mfware texlive-metafont git 
 ```
 
-WIP Docker
-==========
+After that follow `Install locally`.
 
-There is experimented Dockerfile, you can create container which will install all dependencies
-and `calendar-maker` and will run it on `/work` directory:
-
-```
-sudo docker build -t calendar-maker .
-sudo docker run -it --user $UID -v $PWD/tmp:/work calendar-maker
-```
-
-However this doesn't work as the USER is not set in the container. Will fix that soon.
-
-Install
-=======
+Install locally
+===============
 
 ```
 git clone https://github.com/neolfi/calendar-maker.git
 cd calendar-maker
 npm install .
+export PATH=$PATH:$PWD
+```
+
+Install into Docker container
+=============================
+
+```
+git clone https://github.com/neolfi/calendar-maker.git
+cd calendar-maker
+./calendar-maker-build-docker
 export PATH=$PATH:$PWD
 ```
 
@@ -78,6 +72,12 @@ cd my-calendar
 2. Run `calendar-maker` for first time, it will create basic configuration and
    it will create first output
 
+```
+calendar-maker-docker
+```
+
+or if running locally:
+ 
 ```
 calendar-maker
 ```
@@ -111,3 +111,4 @@ Configuration
 =============
 
 For the configuration examples look at `calendar-maker/example/*` or into code :-)
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+MY_SCRIPT=`realpath $0`
+MY_PATH=`dirname $MY_SCRIPT`
+
+docker build \
+    -f ${MY_PATH}/Dockerfile \
+    -t calendar-maker \
+    --build-arg USER=${USER} \
+    --build-arg USER_ID=`id -u` \
+    --build-arg USER_GID=`id -g` \
+    ${MY_PATH}/.
+
