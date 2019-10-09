@@ -54,58 +54,52 @@ export PATH=$PATH:$PWD
 Use
 ===
 
-1. Create working directory
+1. Create your calendar directory:
 
-If you are using `docker` container the go to mapped `/work` directory:
-
-```
-cd /work
-```
-
-then create your calendar directory:
-
-```
-mkdir my-calendar
-cd my-calendar
-```
+    ```
+    mkdir my-calendar
+    cd my-calendar
+    ```
 
 2. Run `calendar-maker` for first time, it will create basic configuration and
-   it will create first output
+    it will create first output
 
-```
-calendar-maker-docker
-```
+    ```
+    calendar-maker-docker
+    ```
 
-or if running locally:
- 
-```
-calendar-maker
-```
+    or if running locally:
 
-```
-my-calendar$ calendar-maker 
-Updating templates...
-Converting images...
-Generating TeX...
-Creating PDF (may take couple minutes)...
-All done.
-my-calendar$ ls **
-born.json  config.json  died.json  holidays_local.json  message.json
+    ```
+    calendar-maker
+    ```
 
-output:
-generate.log  output.aux  output.log  output.pdf  output-term.log  output.tex  photos.log
+    the output will be:
 
-photos:
-00-PHOTOSREADME
-```
+    ```
+    my-calendar$ calendar-maker 
+    Updating templates...
+    Converting images...
+    Generating TeX...
+    Creating PDF (may take couple minutes)...
+    All done.
+    my-calendar$ ls **
+    born.json  config.json  died.json  holidays_local.json  message.json
+
+    output:
+    generate.log  output.aux  output.log  output.pdf  output-term.log  output.tex  photos.log
+
+    photos:
+    00-PHOTOSREADME
+    ```
 
 3. Modify the configuration in the `*.json` files and copy photos to `photos` folder
-   look at `photos/00-PHOTOSREADME` how the files need to be named
+    look at `photos/00-PHOTOSREADME` how the files need to be named
 
 4. Re run the `calendar-maker` to regenerate PDF output, all outputs are in `output` directory
 
 5. The resulting printable calendar is then in `output/output.pdf`. It is A5 format which can
-   be printed, cut and bind.
+    be printed, cut and bind.
 
 Configuration
 =============
