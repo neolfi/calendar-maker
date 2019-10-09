@@ -1,6 +1,6 @@
 {
   "name": "calendar-maker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Generate printable weekly calendar with custom events and photos.",
   "main": "generate.js",
   "directories": {
@@ -10,7 +10,7 @@
     "calendar-base": "^0.3.0",
     "generate-weeks": "^1.0.3",
     "glob-fs": "^0.1.7",
-    "moment": "^2.22.2",
+    "moment": "^2.24.0",
     "weekz": "^2.0.0"
   },
   "devDependencies": {},
