@@ -106,3 +106,13 @@ Configuration
 
 For the configuration examples look at `calendar-maker/example/*` or into code :-)
 
+Debugging
+=========
+
+In case of debugging new code with docker container it is handy to remap the cloned
+Github project with local one, for example:
+
+```
+docker run -it -v $PWD:/work -v ~/calendar-maker:/calendar-maker calendar-maker
+```
+
