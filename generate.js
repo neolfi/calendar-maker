@@ -23,16 +23,19 @@ var died = require(run_path + '/died.json')
 var message = require(run_path + '/message.json')
 
 var moment_locale = {
+    'slovak':'sk',
     'czech':'cs',
     'finnish':'fi'
 }
 
 var week_locale = {
+    'slovak':'týždeň',
     'czech':'týden',
     'finnish':'viikko'
 }
 
 var born_died_offset = {
+    'slovak':0,
     'czech':0,
     'finnish':6
 }
