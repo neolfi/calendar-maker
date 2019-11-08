@@ -8,6 +8,8 @@ The engine is implemented in Node.js and it generates LaTeX file which
 is then translated to PDF. There are bunch of LaTeX packages used and
 there are page templates used by engine.
 
+Supported languages are: *czech*, *slovak* and *finnish*
+
 Currently there is no error handling or checking what-so-ever so use at own
 risk. 
 
