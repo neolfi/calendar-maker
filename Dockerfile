@@ -1,4 +1,4 @@
-FROM fedora
+FROM fedora:30
 
 ARG USER=user
 ARG USER_ID=1000
