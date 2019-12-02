@@ -1,4 +1,6 @@
 #!/bin/bash
 
-docker run -it -v $PWD:/work calendar-maker
+DIRNAME=`basename "$PWD" | sed -e 's/ /-/g'`
+docker run -it -v "$PWD":/work calendar-maker
+mv output/work.pdf output/$DIRNAME.pdf
 
