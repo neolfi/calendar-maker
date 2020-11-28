@@ -115,6 +115,6 @@ In case of debugging new code with docker container it is handy to remap the clo
 Github project with local one, for example:
 
 ```
-docker run -it -v $PWD:/work -v ~/calendar-maker:/calendar-maker calendar-maker
+docker run -it -v $PWD:/work:Z -v ~/calendar-maker:/calendar-maker:Z calendar-maker
 ```
 
