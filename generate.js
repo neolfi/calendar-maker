@@ -292,7 +292,7 @@ function get_weeks_in_year() {
     var start = get_week(0).week()
     var end = get_last_week().week()
     var weeks = 52
-    if ( start == 52 ) weeks++
+    if ( ( start == 52 ) || ( start == 53 ) ) weeks++
     if ( ( end == 1 ) || ( end == 53 ) ) weeks++
     return weeks
 }
