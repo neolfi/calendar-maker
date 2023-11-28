@@ -272,9 +272,8 @@ function get_photo( filename ) {
 
 function get_week_photo( date ) {
     var date_last = moment(date)
-    var date_first = moment(date)
     date_last.add(6, 'days')
-    var photo_name = date_first.format('Y-') + pad(date_last.week().toString(), 2)
+    var photo_name = date_last.format('Y-') + pad(date_last.week().toString(), 2)
     return get_photo( photo_name )
 }
 
