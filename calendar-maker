@@ -53,6 +53,14 @@ echo "Creating PDF (may take couple minutes)..."
 cd output
 pdflatex -interaction=nonstopmode -halt-on-error output.tex > output-term.log 2>&1
 pdflatex -interaction=nonstopmode -halt-on-error output.tex >> output-term.log 2>&1
+if [ $? -ne 0 ]; then
+    echo "PDF generation failed. Check output/output-term.log for details."
+    exit 1
+fi
+if [ ! -f output.pdf ]; then
+    echo "PDF file not found. Check output/output-term.log for details."
+    exit 1
+fi
 
 # Generate also A4, uncomment if needed
 #cp $MY_PATH/templates/output-a4.tex .
