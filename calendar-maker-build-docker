@@ -9,5 +9,6 @@ docker build \
     --build-arg USER=${USER} \
     --build-arg USER_ID=`id -u` \
     --build-arg USER_GID=`id -g` \
+    --no-cache \
     ${MY_PATH}/.
 
