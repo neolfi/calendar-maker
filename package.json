@@ -10,7 +10,7 @@
     "calendar-base": "^0.3.0",
     "generate-weeks": "^1.0.3",
     "glob-fs": "^0.1.7",
-    "moment": "^2.24.0",
+    "moment": "^2.30.1",
     "weekz": "^2.0.0"
   },
   "devDependencies": {},
