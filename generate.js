@@ -28,25 +28,6 @@ var moment_locale = {
     'finnish':'fi'
 }
 
-
-// Workaround for https://github.com/moment/moment/issues/6153
-// the project is not maintained anymore so lets just use
-// workaround for the time being.
-var months_remap = {
-    'ledna':'leden',
-    'února':'únor',
-    'března':'březen',
-    'dubna':'duben',
-    'května':'květen',
-    'června':'červen',
-    'července':'červenec',
-    'srpna':'srpen',
-    'září':'září',
-    'října':'říjen',
-    'listopadu':'listopad',
-    'prosince':'prosinec'
-}
-
 var week_locale = {
     'slovak':'týždeň',
     'czech':'týden',
@@ -85,17 +66,12 @@ function output_template() {
     fs.appendFileSync(outfilename, file)
 }
 
-function get_month_year( date ) {
-    return months_remap[date.format('MMMM')] + ' ' + date.format('Y');
-}
-
 function output_week_header( week ) {
     var date = get_week( week );
-    var month = get_month_year( date );
+    var month = date.format('MMMM Y');
     var week_num = date.week();
     date.add(6, 'days')
-    var next_month = get_month_year( date );
-    if ( month != next_month ) month += ' / ' + next_month
+    if ( month != date.format('MMMM Y') ) month += ' / ' + date.format('MMMM Y')
     var header = '\\PlaceText' + arrange_week_header_command + '{18mm}{' + month + ' / ' + week_num + '. ' + week_locale[config['locale']] + '}'
     fs.appendFileSync(outfilename, header)
 }
@@ -188,7 +164,7 @@ function output_holidays_text( holidays_text, dayofweek ) {
 function output_month_name( date, dayofweek ) {
     if ( date.format('D') != '1' ) return
     var offset = 20 + 17 * dayofweek
-    var month_name = months_remap[date.format('MMMM')]
+    var month_name = date.format('MMMM')
     var text = '\\PlaceTextLeft{' + arrange_holidays_text_pos + 'mm}{' + offset + 'mm}{\\small{' + month_name + '}}\n'
     fs.appendFileSync(outfilename, text) 
 }
