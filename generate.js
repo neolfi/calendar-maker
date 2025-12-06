@@ -177,7 +177,7 @@ function output_photo( photo ) {
     }
     fs.appendFileSync(outfilename, '\\begin{tikzpicture}[remember picture,overlay]\n')
     fs.appendFileSync(outfilename, '  \\node[outer sep=0pt,inner sep=0pt,anchor=north]\n')
-    fs.appendFileSync(outfilename, '    at ([xshift=' + arrange_photo_pos + 'mm,yshift=-26mm]current page.north west)\n')
+    fs.appendFileSync(outfilename, '    at ($(current page.north west) + (' + arrange_photo_pos + 'mm,-26mm)$)\n')
     fs.appendFileSync(outfilename, '    {\\includegraphics[max width=104mm, max height=112mm]{../' + photo + '}};\n')
     fs.appendFileSync(outfilename, '\\end{tikzpicture}\n')
 }
@@ -191,7 +191,7 @@ function output_front_page_photo( ) {
     }
     fs.appendFileSync(outfilename, '\\begin{tikzpicture}[remember picture,overlay]\n')
     fs.appendFileSync(outfilename, '  \\node[outer sep=0pt,inner sep=0pt,anchor=north]\n')
-    fs.appendFileSync(outfilename, '    at ([xshift=105mm,yshift=-26mm]current page.north west)\n')
+    fs.appendFileSync(outfilename, '    at ($(current page.north west) + (105mm,-26mm)$)\n')
     fs.appendFileSync(outfilename, '    {\\includegraphics[max width=200mm, max height=112mm]{../' + photo + '}};\n')
     fs.appendFileSync(outfilename, '\\end{tikzpicture}\n')
 }
