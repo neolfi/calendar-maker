@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DIRNAME=`basename "$PWD" | sed -e 's/ /-/g'`
+MY_SCRIPT=`realpath $0`
+MY_PATH=`dirname $MY_SCRIPT`
+docker run --rm -it -v "$PWD":/work:Z -v $MY_PATH:/calendar-maker:Z --entrypoint /bin/bash calendar-maker
+mv output/work.pdf output/$DIRNAME.pdf
+

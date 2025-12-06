@@ -118,3 +118,10 @@ Github project with local one, for example:
 docker run -it -v $PWD:/work:Z -v ~/calendar-maker:/calendar-maker:Z calendar-maker
 ```
 
+Or run script which will mount the local copy and exec into the container:
+
+```
+calendar-maker-docker-shell
+```
+
+Then you can modify the code in your local copy and test it inside the container.
