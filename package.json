@@ -13,7 +13,6 @@
     "moment": "^2.30.1",
     "weekz": "^2.0.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
