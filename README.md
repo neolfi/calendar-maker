@@ -125,3 +125,11 @@ calendar-maker-docker-shell
 ```
 
 Then you can modify the code in your local copy and test it inside the container.
+To run whole process inside the container just run:
+
+```
+node /calendar-maker/generate.js
+cd output
+pdflatex output.tex
+pdflatex output.tex
+```
