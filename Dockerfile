@@ -10,7 +10,7 @@ ENV USER_GID=${USER_GID}
 RUN echo -ne 'fastestmirror=true' >> /etc/dnf/dnf.conf && \
     dnf install -y nodejs ImageMagick \
 	texlive-adjustbox texlive-babel-czech xpdf texlive-pdfpages \
-        texlive-mfware texlive-metafont git \
+        texlive-mfware texlive-metafont texlive-ec git \
         passwd && \
     dnf clean all && \
     useradd -m -u ${USER_ID} ${USER} && \
